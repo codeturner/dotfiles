@@ -1,0 +1,37 @@
+[alias]
+  # common aliases
+  a = !git add . && git status -s
+  aa = !git add -A . && git status -s
+  au = !git add -u . && git status -s
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort  
+  b = branch
+  c = commit
+  cm = commit -m
+  co = checkout
+  cob = checkout -b
+  d = diff
+  dd = difftool
+  f = fetch
+  l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset' -10
+  ls = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+  lb = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+  ll = log --stat --abbrev-commit
+  lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+  r = !git reset -q && git status -s
+  r1 = !git reset HEAD~1 -q && git status -s
+  r2 = !git reset HEAD~2 -q && git status -s
+  s = status -s
+  unstage = reset HEAD --
+  # custom aliases
+  sub = submodule
+  bclean = cleanunmerged
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+  develop = !git checkout develop && git pull && git cleanunmerged
+  master = !git checkout master && git pull && git cleanunmerged
+  submaster = sub foreach git master
+  # submodule aliases
+  pp = pull --recurse-submodules
+  cl = clone --recurse-submodules
