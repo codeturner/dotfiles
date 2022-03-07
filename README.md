@@ -2,7 +2,7 @@
 
 Files and methods used to setup my  Mac from scratch.
 
-Refer to <https://sourabhbajaj.com/mac-setup/iTerm/zsh.html> for recipes for getting a mac up and going.
+Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up and going.
 
 ## System Preferences
 
@@ -98,7 +98,7 @@ Install the missing package manager for macOS by following the instructions at <
 
 ### Formulae
 
-When installing the following formulae, pay extra attention to notices indicating changes that must be made to shell profile scripts. I've handled them in the terminal setup below, but you should know why we need to do it.
+When installing the following brew formulae, pay extra attention to notices indicating changes that must be made to shell profile scripts. I've handled them in the terminal setup below, but you should know why we need to do it.
 
 * ack - faster grep
 * bash-completion - auto complete library; additional ones available
@@ -121,9 +121,9 @@ When installing the following formulae, pay extra attention to notices indicatin
 * wget - web resource tool
 * zsh - shell
 
-## Brew casks
+### Casks
 
-Install the following casks:
+Install the following brew casks:
 
 * alfred - better than stoplight
   * Preferences > General > Launch at login
@@ -148,6 +148,39 @@ Install the following casks:
   * Preferences > Trigger on Mouse Down
 * slack - messaging app
 * visual-studio-code - setup later
+
+### Quick Look Plugins Casks
+
+Using finder, selecting a file and tapping the space bar will bring up the Quick Look preview of the file. This is different than the Finder preview.
+
+Install the following quick look plugins casks:
+
+> Note some of these apps aren't official Apple apps, so you may need to install using the no quarantine option:
+> `brew install --cask --no-quarantine CASK_NAME_HERE`
+
+* qlmarkdown - preview markdown in github style
+* syntax-highlight - preview source files
+* betterzip - preview archives - teases as a paid app but the included quick look is free
+
+> Note that each of these install as apps, so you'll need to launch each app for the first time to activate the plugin.
+
+#### Catalina Notes
+
+To get some of these plugins working in Catalina+, you might need to remove the quarantine attribute. Installing using the `--no-quarantine` option in brew should handle this, but if all else fails, you can correct the situation manually.
+
+For example, if a quicklook plugin isn't working, run this to see the attributes:
+
+```sh
+xattr -r ~/Library/QuickLook
+```
+
+And run this to remove the attributes:
+
+```sh
+xattr -d -r com.apple.quarantine ~/Library/QuickLook
+```
+
+Then, restart your system, or hopefully `qlmanage -r` will suffice.
 
 ## SDKMAN
 
