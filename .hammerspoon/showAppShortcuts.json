@@ -1,0 +1,44 @@
+[
+  {
+    "application": "Slack",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "S"
+  },
+  {
+    "application": "Microsoft Outlook",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "O"
+  },
+  {
+    "application": "Microsoft Teams",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "T"
+  },
+  {
+    "application": "YouTube Music",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "M"
+  },
+  {
+    "application": "Google Chrome",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "G"
+  },
+  {
+    "application": "Google Chrome",
+    "window": "workflowy",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "W"
+  },
+  {
+    "application": "Visual Studio Code",
+    "alternateName": "Code",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "C"
+  },
+  {
+    "application": "Intellij IDEA",
+    "mods": ["cmd", "alt", "ctrl"],
+    "key": "I"
+  }
+]

@@ -14,9 +14,12 @@ Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up a
 * Battery > Power > 30 mins
 * Battery > Power > Prevent sleep
 * Trackpad > Check all on all tabs
-* Keyboard > Key Repeat > Fast (all the way to the right)
-* Keyboard > Delay Until Repeat > Short 80%
+* Keyboard > Keyboard > Key Repeat > Fast (all the way to the right)
+* Keyboard > Keyboard > Delay Until Repeat > Short 80%
+* Keyboard > Keyboard > Turn keyboard backlight off after 1 min of inactivity
+* Keyboard > Keyboard > Use F1, F2 keys...
 * Keyboard > Shortcuts > Launchpad > disable dock hiding shortcut
+* Keyboard > Shortcuts > Mission Control > disable show desktop as F11
 * Keyboard > Shortcuts > Spotlight > search shortcut - shift+cmd+space
 * Dock > Automatically hide and show the Dock
 * Dock > Bluetooth > Hide
@@ -29,6 +32,12 @@ Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up a
 * Set screenshots
   * `mkdir ~/Screenshots`
   * `defaults write com.apple.screencapture location ${HOME}/Screenshots && killall SystemUIServer`
+* Always show hidden files
+  * `defaults write com.apple.finder AppleShowAllFiles True; killall Finder`
+
+### Modifier Keys
+
+If you're using an external non-Apple keyboard, you will likely need to map the modifier keys. Go to `Keyboard > Keyboard > Modifier Keys` and swap the Command and Option keys.
 
 ## Enable Home and End Keys
 
@@ -43,8 +52,9 @@ This will remap the following in most Mac apps including Chrome (some apps do th
 * Home and End will go to start and end of line
 * Shift+Home and Shift+End will select to start and end of line
 * Ctrl+Home and Ctrl+End will go to start and end of document
-* Shift+Ctrl+Home and Shift+Ctrl+End will select to start and end of document
-* Note that you will need to reboot after creating this file for it to take effect.
+* Ctrl+/ is mapped to noop so that it won't beep at you when using it in other apps
+
+Note that you will need to reboot after creating this file for it to take effect
 
 ## Finder
 
@@ -52,6 +62,8 @@ This will remap the following in most Mac apps including Chrome (some apps do th
 * General > New Finder show > Home
 * Sidebar > check Home -- uncheck Shared
 * Advanced > Show extensions
+
+Then, drop other important folder to the Favorites part of the sidebar, such as `src` and `Screenshots`.
 
 ## Cleanup Dock Bar
 
@@ -134,6 +146,7 @@ Install the following brew casks:
 * github - github desktop app
 * hammerspoon - mac automation
 * iterm2 - setup later
+* key-codes - view code of pressed key
 * keystore-explorer - exactly what it says
 * postman - API tool
 * react-native-debugger - dev tool
@@ -164,7 +177,28 @@ Install the following quick look plugins casks:
 
 > Note that each of these install as apps, so you'll need to launch each app for the first time to activate the plugin.
 
-#### Catalina Notes
+### Folder Icons
+
+In Finder, the Mac default folders show some awesome icons on them, but everything else is blank. If that bugs you, try out this tool. Warning: this installs a ton of dependencies!
+
+`brew install --cask folderify`
+
+You can use `folderfy` to create transparent masked icons -- see <https://github.com/lgarron/folderify> for more details. Included are some icons I use, so let's apply them now:
+
+```sh
+mkdir -p ~/bin
+folderify icons/bolt-lightning.png ~/bin
+mkdir -p ~/src
+folderify icons/code.png ~/src
+mkdir -p ~/temp
+folderify icons/poo.png ~/temp
+mkdir -p ~/Screenshots
+folderify icons/crop.png ~/Screenshots
+```
+
+Note that if you add these folders to the sidebar, mac only supports its own icons here (or those who have written a Finder Sync Extension).
+
+### Catalina Notes
 
 To get some of these plugins working in Catalina+, you might need to remove the quarantine attribute. Installing using the `--no-quarantine` option in brew should handle this, but if all else fails, you can correct the situation manually.
 
@@ -440,7 +474,9 @@ Open the extension, login to github, then wait for settings to update VS Code.
 * esbenp.prettier-vscode - js prettier
 * formulahendry.auto-close-tag - auto close html/xml tags
 * formulahendry.auto-rename-tag - auto rename paired tags
+* GitHub.vscode-pull-request-github - manage github pull requests
 * hex-ci.stylelint-plus - Modern CSS/SCSS/Less linter
+* Koihik.vscode-lua-format - lua formatter - see hammerspoon
 * mitchdenny.ecdc - text selection encode/decode
 * moshfeu.diff-merge - allows left/right merging in diff
 * ms-python.python - python intellisense, linting, debugging, etc
@@ -461,3 +497,11 @@ Open the extension, login to github, then wait for settings to update VS Code.
 * wmaurer.change-case - change case of selected word
 * yzane.markdown-pdf - convert markdown doc to pdf
 * yzhang.markdown-all-in-one - markdown tools
+
+## Hammerspoon
+
+We installed it. Let's use if for some mac automation.
+
+Either refer to the  `.hammerspoon` files from this repo or just copy them over, then modify the `init.lua` file to fit your preferences.
+
+If you find yourself editing lua in vs code, you'll want to use the installed `vscode-lua-format` to auto format the code. But I disagree with the line limit, so customize it by copying `.lua` from this repo to your home directory and then update vscode settings `vscode-lua-format.configPath` to point to the full path of the `.lua/vscode-lua-format` you moved.
