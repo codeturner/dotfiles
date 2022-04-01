@@ -455,11 +455,21 @@ Copy `.gitconfig.aliases` into your home directory. Then edit `~/.gitconfig` to 
 
 ## VS Code
 
-`code --install-extension Shan.code-settings-sync`
+### Settings Sync
 
-Open the extension, login to github, then wait for settings to update VS Code.
+First, let's load up what we've sync'd before on other installs of code.
+
+Turn on Settings Sync using the `Turn On Settings Sync...` entry in the `Manage` gear menu at the bottom of the Activity Bar.
+
+Select all settings to sync. Then, click `Sign in & Turn on` and sign in with your GitHub or Microsoft account. After making this selection, the browser will open so that you can sign in to your Microsoft or GitHub account. When a Microsoft account is chosen, you can use either personal accounts, such as Outlook accounts, or Azure accounts, and you can also link a GitHub account to a new or existing Microsoft account.
+
+After signing in, Settings Sync will be turned on and continue to synchronize your preferences automatically in the background.
+
+Now, just sit back and wait for your VS Code to update.
 
 ### Recommended extensions
+
+If starting from scratch, here's a hit list of popular extensions to install:
 
 * acarreiro.calculate - evaluate selected math expressions in your document
 * adammaras.overtype - support insert vs overtype mode
@@ -490,7 +500,6 @@ Open the extension, login to github, then wait for settings to update VS Code.
 * patbenatar.advanced-new-file - create a new file and select a dir anywhere in your workspace
 * PKief.material-icon-theme - material design icons
 * searKing.preview-vscode - previewer for markdown, html, etc
-* Shan.code-settings-sync - vs code settings sync to github
 * sleistner.vscode-fileutils - tooling to move, create, etc files and dirs
 * slevesque.vscode-hexdump - show hex dump of file
 * waderyan.gitblame - show git blame of file in status bar
