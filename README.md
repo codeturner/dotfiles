@@ -115,6 +115,7 @@ When installing the following brew formulae, pay extra attention to notices indi
 * ack - faster grep
 * bash-completion - auto complete library; additional ones available
 * fzf - fuzzy finder
+* gh - github cli
 * git - source control
 * git-lfs - git large file support
 * go - go language
@@ -505,3 +506,18 @@ We installed it. Let's use if for some mac automation.
 Either refer to the  `.hammerspoon` files from this repo or just copy them over, then modify the `init.lua` file to fit your preferences.
 
 If you find yourself editing lua in vs code, you'll want to use the installed `vscode-lua-format` to auto format the code. But I disagree with the line limit, so customize it by copying `.lua` from this repo to your home directory and then update vscode settings `vscode-lua-format.configPath` to point to the full path of the `.lua/vscode-lua-format` you moved.
+
+## Zoom
+
+Use the following settings:
+
+* General
+  * Use dual monitors
+  * Enter full screen
+  * Always show meeting controls
+  * Remove Zoom from menu bar
+* Audio
+  * Automatically join computer audio
+  * Mute my mic when joining
+* Keyboard Shortcuts
+  * Mute/Unmute - ctrl+opt+cmd+A - enable global
