@@ -35,6 +35,9 @@ Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up a
 * Always show hidden files
   * `defaults write com.apple.finder AppleShowAllFiles True; killall Finder`
 
+### Emoji Text Substitution
+
+Enable slack style text substitution everywhere by installing a plist into your `Keyboard > Text` preferences. Follow the instructions here: <https://github.com/warpling/Macmoji>
 ### Modifier Keys
 
 If you're using an external non-Apple keyboard, you will likely need to map the modifier keys. Go to `Keyboard > Keyboard > Modifier Keys` and swap the Command and Option keys.
