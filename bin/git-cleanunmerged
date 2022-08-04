@@ -1,0 +1,20 @@
+#!/bin/bash
+
+while getopts "f" opt; do
+	case $opt in
+		f) forceDelete=1 ;;
+		*) exit 1 ;;
+	esac
+done
+
+for branch in `git branch --no-merged`
+do
+	if [ -z "$forceDelete" ]; then
+		read -p "> Delete branch '${branch}'? [y/N] " answer
+		if [[ ! $answer =~ ^[Yy]$ ]]; then
+			continue
+		fi
+		echo "-- OK, deleting branch '${branch}'..."
+	fi
+	git branch -D ${branch}
+done
