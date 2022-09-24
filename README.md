@@ -61,6 +61,8 @@ Note that you will need to reboot after creating this file for it to take effect
 
 ## Finder
 
+Customize Finder with the following preferences:
+
 * Customize Toolbar - path, view, new folder, trash, share, actions
 * General > New Finder show > Home
 * Sidebar > check Home -- uncheck Shared
@@ -73,6 +75,8 @@ Then, drop other important folder to the Favorites part of the sidebar, such as 
 Remove all the default items. I prefer to use alfred to launch applications, so the dock bar will be used only to show running applications.
 
 ## Messages
+
+Customize Messages with the following preferences:
 
 * General > disable play sound effect
 * iMessage > enable messages in icloud
