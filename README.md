@@ -220,6 +220,19 @@ xattr -d -r com.apple.quarantine ~/Library/QuickLook
 
 Then, restart your system, or hopefully `qlmanage -r` will suffice.
 
+## Node
+
+Let's download node and set our default version.
+
+```sh
+# install latest
+nvm i node
+# install lts
+nvm i --lts
+# set current and default to lts (assuming v16.* is current lts)
+nvm use default 16
+```
+
 ## SDKMAN
 
 SDKMAN! is a tool for managing parallel versions of multiple Software Development Kits. We'll use this to manage our JVMs. By default, it installs in your home directory, which is not ideal. Here, we'll install it at `/opt/sdkman`.
@@ -412,7 +425,8 @@ This will create two files in a folder called .ssh in your home directory with t
 Let's repeat the process for access to github:
 
 ```sh
-ssh-keygen -f ~/.ssh/github-$(date "+%Y%m%d")-${USER}-$(hostname)
+vared -p "github username: " -c _GHUSER
+ssh-keygen -f ~/.ssh/github-$(date "+%Y%m%d")-${_GHUSER}-$(hostname)
 ```
 
 Now, let's wire them up by editing the `~/.ssh/config`, and specifying the two keys generated:
@@ -476,10 +490,13 @@ If starting from scratch, here's a hit list of popular extensions to install:
 
 * acarreiro.calculate - evaluate selected math expressions in your document
 * adammaras.overtype - support insert vs overtype mode
+* albert.TabOut - Tab out of quotes, brackets, etc
 * alefragnani.project-manager - project manager and switcher
 * bierner.color-info - css color lookup
+* bradlc.vscode-tailwindcss - Intelligent Tailwind CSS tooling for VS Code
 * christian-kohler.path-intellisense - filename autocomplete
 * chrmarti.regex - regex previewer
+* ckolkman.vscode-postgres - postgresql managemeent tool
 * DavidAnson.vscode-markdownlint - markdown linter
 * dbaeumer.vscode-eslint - ES linter
 * DotJoshJohnson.xml - XML Formatting, XQuery, and XPath Tools
@@ -489,27 +506,36 @@ If starting from scratch, here's a hit list of popular extensions to install:
 * formulahendry.auto-close-tag - auto close html/xml tags
 * formulahendry.auto-rename-tag - auto rename paired tags
 * GitHub.vscode-pull-request-github - manage github pull requests
+* Gruntfuggly.todo-tree - Show TODO, FIXME, etc. comment tags in a tree view
 * hex-ci.stylelint-plus - Modern CSS/SCSS/Less linter
 * Koihik.vscode-lua-format - lua formatter - see hammerspoon
 * mitchdenny.ecdc - text selection encode/decode
 * moshfeu.diff-merge - allows left/right merging in diff
+* ms-azuretools.vscode-docker - Makes it easy to create, manage, and debug containerized applications
 * ms-python.python - python intellisense, linting, debugging, etc
 * ms-python.vscode-pylance - python rich language support
 * ms-toolsai.jupyter - jupyter notebook support
 * ms-toolsai.jupyter-keymap - match key mappings to jupyter notebook
 * ms-toolsai.jupyter-renderers - jupyter notebook renderer
+* ms-vscode.live-server - 
+* ms-vsliveshare.vsliveshare - real-time code collaboration
+* ms-vsliveshare.vsliveshare-audio - real-time code collaboration audio
+* ms-vsliveshare.vsliveshare-pack - real-time code collaboration extensions
 * nhoizey.gremlins - highlight as warnings unexpected characters
+* nrwl.angular-console - nx console
 * oderwat.indent-rainbow - indention coloring
 * patbenatar.advanced-new-file - create a new file and select a dir anywhere in your workspace
 * PKief.material-icon-theme - material design icons
+* Prisma.prisma - Adds syntax highlighting, formatting, auto-completion, etc for .prisma files
 * searKing.preview-vscode - previewer for markdown, html, etc
 * sleistner.vscode-fileutils - tooling to move, create, etc files and dirs
 * slevesque.vscode-hexdump - show hex dump of file
 * waderyan.gitblame - show git blame of file in status bar
-* wayou.vscode-todo-highlight - highlight TODO: and FIXME: annotations
 * wmaurer.change-case - change case of selected word
 * yzane.markdown-pdf - convert markdown doc to pdf
 * yzhang.markdown-all-in-one - markdown tools
+
+> To print the current list of extensions, run the following command: `code --list-extensions`
 
 ## Hammerspoon
 
@@ -518,6 +544,54 @@ We installed it. Let's use if for some mac automation.
 Either refer to the  `.hammerspoon` files from this repo or just copy them over, then modify the `init.lua` file to fit your preferences.
 
 If you find yourself editing lua in vs code, you'll want to use the installed `vscode-lua-format` to auto format the code. But I disagree with the line limit, so customize it by copying `.lua` from this repo to your home directory and then update vscode settings `vscode-lua-format.configPath` to point to the full path of the `.lua/vscode-lua-format` you moved.
+
+## Docker + Colima
+
+Colima is an alternative to Docker Desktop that's solely available as a command-line utility. Under the hood Colima uses the Lima-VM. Lima launches Linux virtual machines with automatic file sharing and port forwarding (similar to WSL2), and containerd.
+
+To install, you'll need both the docker client and the colima server:
+
+```sh
+brew install docker colima
+```
+
+Start colima:
+
+```sh
+colima start
+```
+
+Then, check docker:
+
+```sh
+> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+
+### Docker Compose v2
+
+For Intel:
+
+```sh
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-darwin-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+```
+
+For M1/ARM:
+
+```sh
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-darwin-aarch64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+```
+
+Check if docker compose works:
+
+```sh
+❯ docker compose version
+Docker Compose version v2.2.3
+```
 
 ## Zoom
 
