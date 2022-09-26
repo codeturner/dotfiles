@@ -335,7 +335,7 @@ Edit `.zshrc` and set the theme:
 
 `ZSH_THEME="powerlevel10k/powerlevel10k"`
 
-Launch a new terminal and it should auto-launch `p10k configure` where you can choose your style. Or, use my preferred configuration by copying `.p10k.zsh` into your home directory.
+Launch a new terminal and it should auto-launch `p10k configure` where you can choose your style. Or, use my preferred configuration by copying [.p10k.zsh](.p10k.zsh) into your home directory.
 
 Edit or create `.zprofile` and add the following:
 
@@ -346,7 +346,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 ```
 
-Copy the all of the files in this repo's `.oh-my-zsh/custom` into `$ZSH_CUSTOM`.
+Copy the all of the files in this repo's [.oh-my-zsh/custom](.oh-my-zsh/custom) into `$ZSH_CUSTOM`.
 
 ### Bash
 
@@ -538,7 +538,7 @@ Then, cuz I'm lazy, I wrote an alias that maps `git bclean` to this script `git 
 
 ### Custom Aliases
 
-Copy `.gitconfig.aliases` into your home directory. Then, reference this file in your config:
+Copy [.gitconfig.aliases](.gitconfig.aliases) into your home directory. Then, reference this file in your config:
 
 ```sh
 git config --global include.path ~/.gitconfig.aliases
@@ -595,7 +595,7 @@ If starting from scratch, here's a hit list of popular extensions to install:
 * ms-toolsai.jupyter - jupyter notebook support
 * ms-toolsai.jupyter-keymap - match key mappings to jupyter notebook
 * ms-toolsai.jupyter-renderers - jupyter notebook renderer
-* ms-vscode.live-server - 
+* ms-vscode.live-server - hosts a local server in your workspace on which to preview your webpages
 * ms-vsliveshare.vsliveshare - real-time code collaboration
 * ms-vsliveshare.vsliveshare-audio - real-time code collaboration audio
 * ms-vsliveshare.vsliveshare-pack - real-time code collaboration extensions
@@ -619,9 +619,9 @@ If starting from scratch, here's a hit list of popular extensions to install:
 
 We installed it. Let's use if for some mac automation.
 
-Either refer to the  `.hammerspoon` files from this repo or just copy them over, then modify the `init.lua` file to fit your preferences.
+Either refer to the  [.hammerspoon](.hammerspoon) files from this repo or just copy them over, then modify the `init.lua` file to fit your preferences.
 
-If you find yourself editing lua in vs code, you'll want to use the installed `vscode-lua-format` to auto format the code. But I disagree with the line limit, so customize it by copying `.lua` from this repo to your home directory and then update vscode settings `vscode-lua-format.configPath` to point to the full path of the `.lua/vscode-lua-format` you moved.
+If you find yourself editing lua in vs code, you'll want to use the installed `vscode-lua-format` to auto format the code. But I disagree with the line limit, so customize it by copying [.lua](.lua) from this repo to your home directory and then update vscode settings `vscode-lua-format.configPath` to point to the full path of the `.lua/vscode-lua-format` you moved.
 
 ## Docker + Colima
 
