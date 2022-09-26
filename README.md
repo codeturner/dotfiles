@@ -1,5 +1,7 @@
 # Codeturner's dotfiles
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Files and methods used to setup my  Mac from scratch.
 
 Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up and going.
@@ -38,6 +40,7 @@ Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up a
 ### Emoji Text Substitution
 
 Enable slack style text substitution everywhere by installing a plist into your `Keyboard > Text` preferences. Follow the instructions here: <https://github.com/warpling/Macmoji>
+
 ### Modifier Keys
 
 If you're using an external non-Apple keyboard, you will likely need to map the modifier keys. Go to `Keyboard > Keyboard > Modifier Keys` and swap the Command and Option keys.
@@ -426,30 +429,32 @@ The key's randomart image is:
 
 This will create two files in a folder called .ssh in your home directory with the name you specified in the command line.
 
-Let's repeat the process for access to github:
+Now, let's wire it up to the system by editing the `~/.ssh/config`:
+
+```text
+UseKeychain yes
+AddKeysToAgent yes
+IdentityFile ~/.ssh/default-blah-blah-blah.local
+```
+
+I mean, duh, don't paste in "default-blah-blah-blah.local" -- it should be your actual file names.
+
+### Github Key Access
+
+Let's create another key for this device's access to github:
 
 ```sh
 vared -p "github username: " -c _GHUSER
 ssh-keygen -f ~/.ssh/github-$(date "+%Y%m%d")-${_GHUSER}-$(hostname)
 ```
 
-Now, let's wire them up by editing the `~/.ssh/config`, and specifying the two keys generated:
+Now, let's wire this new key up to the `github.com` host by editing the `~/.ssh/config` and specifying the new key generated:
 
 ```text
-UseKeychain yes
-AddKeysToAgent yes
-IdentityFile ~/.ssh/default-blah-blah-blah.local
-
 Host github.com
   HostName github.com
   IdentityFile ~/.ssh/github-blah-blah-blah.local
 ```
-
-I mean, duh, don't paste in "default-blah-blah-blah.local", it should be your actual file names.
-
-Now, be sure these files are locked down and have rw to you only: `chmod 600 ~/.ssh/*`
-
-### Github
 
 Next, let's connect to github using your newly generated key.
 
@@ -465,16 +470,85 @@ Once done, verify ssh access:
 ssh -T git@github.com
 ```
 
-## Git
+### Managing Multiple Github Accounts
 
-Copy `.gitconfig.aliases` into your home directory. Then edit `~/.gitconfig` to reference this file:
+If you're like me, you have two Github accounts: one for personal and one for work. How to use both accounts on the same computer automatically?
+
+Simply repeat the steps in the [Github Key Access](#github-key-access) section above, but use an alias for the `Host` in the `~/.ssh/config` file.
+
+For example, if I wanted to create a new key for a github account called `batteryshoes`, my config might now look like this:
+
+```text
+Host github.com-batteryshoes
+  HostName github.com
+  IdentityFile ~/.ssh/github-20220101-batteryshoes-mymac.local
+```
+
+Once done, verify ssh access:
 
 ```sh
-[include]
-  path = ~/.gitconfig.aliases
-  ```
+ssh -T git@github.com-batteryshoes
+```
+
+Then to use this new account in your git commands, simply use the host alias of `github.com-batteryshoes` to clone the repo.
+
+## Git
+
+Let's customize your git install.
+
+### Configure
+
+Set your default git user:
+
+```sh
+git config --global user.name "Put Your Name Here"
+git config --global user.email "put_your@email_here"
+```
+
+And set the default branch:
+
+```sh
+git config --global init.defaultBranch main
+```
+
+And tell git to automatically prune remote branches on calls `fetch` or `pull`:
+
+```sh
+git config --global remote.origin.prune true
+```
+
+Next, let's set vscode as our default merge/diff tool:
+
+```sh
+git config --global merge.tool vscode
+git config --global mergetool.vscode.cmd 'code --wait $MERGED'
+git config --global diff.tool vscode
+git config --global diff.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
+```
+
+All these commands will be reflected to your `~/.gitconfig` file.
+
+### Custom Commands
+
+Git has a great plugin where if you have an executable script in your PATH that follows the naming scheme of `git-mycommand`, then you'll be able to run this custom script as the git command: `git mycommand`
+
+Let's add a custom command to cleanup local branches interactively. Copy [bin/git-cleanunmerged](bin/git-cleanunmerged) into the home directory. Note that we made sure the `~/bin` is in the `PATH` env var above.
+
+Then, cuz I'm lazy, I wrote an alias that maps `git bclean` to this script `git cleanunmerged` (see [Custom Aliases](#custom-aliases)).
+
+### Custom Aliases
+
+Copy `.gitconfig.aliases` into your home directory. Then, reference this file in your config:
+
+```sh
+git config --global include.path ~/.gitconfig.aliases
+```
+
+Also, remember to make sure any existing `[alias]` sections out of the global config file at `~/.gitconfig`.
 
 ## VS Code
+
+Let's setup `code` for proper use.
 
 ### Settings Sync
 
