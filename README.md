@@ -439,6 +439,12 @@ IdentityFile ~/.ssh/default-blah-blah-blah.local
 
 I mean, duh, don't paste in "default-blah-blah-blah.local" -- it should be your actual file names.
 
+Finally, add the new private key to your agent:
+
+```sh
+ssh-add ~/.ssh/default-blah-blah-blah.local
+```
+
 ### Github Key Access
 
 Let's create another key for this device's access to github:
@@ -454,6 +460,12 @@ Now, let's wire this new key up to the `github.com` host by editing the `~/.ssh/
 Host github.com
   HostName github.com
   IdentityFile ~/.ssh/github-blah-blah-blah.local
+```
+
+As before, add the new private key to your agent:
+
+```sh
+ssh-add ~/.ssh/default-blah-blah-blah.local
 ```
 
 Next, let's connect to github using your newly generated key.
@@ -474,7 +486,7 @@ ssh -T git@github.com
 
 If you're like me, you have two Github accounts: one for personal and one for work. How to use both accounts on the same computer automatically?
 
-Simply repeat the steps in the [Github Key Access](#github-key-access) section above, but use an alias for the `Host` in the `~/.ssh/config` file.
+Simply repeat the steps in the [Github Key Access](#github-key-access) section above, but use an alias for the `Host` entry in the `~/.ssh/config` file.
 
 For example, if I wanted to create a new key for a github account called `batteryshoes`, my config might now look like this:
 
