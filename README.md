@@ -596,6 +596,7 @@ If starting from scratch, here's a hit list of popular extensions to install:
 * formulahendry.auto-close-tag - auto close html/xml tags
 * formulahendry.auto-rename-tag - auto rename paired tags
 * GitHub.vscode-pull-request-github - manage github pull requests
+* golang.go - go intellisense, linting, debugging, etc
 * Gruntfuggly.todo-tree - Show TODO, FIXME, etc. comment tags in a tree view
 * hex-ci.stylelint-plus - Modern CSS/SCSS/Less linter
 * Koihik.vscode-lua-format - lua formatter - see hammerspoon
@@ -617,6 +618,7 @@ If starting from scratch, here's a hit list of popular extensions to install:
 * patbenatar.advanced-new-file - create a new file and select a dir anywhere in your workspace
 * PKief.material-icon-theme - material design icons
 * Prisma.prisma - Adds syntax highlighting, formatting, auto-completion, etc for .prisma files
+* rust-lang.rust-analyzer - rust development
 * searKing.preview-vscode - previewer for markdown, html, etc
 * sleistner.vscode-fileutils - tooling to move, create, etc files and dirs
 * slevesque.vscode-hexdump - show hex dump of file
