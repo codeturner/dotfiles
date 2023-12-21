@@ -335,6 +335,10 @@ Edit `.zshrc` and set the theme:
 
 `ZSH_THEME="powerlevel10k/powerlevel10k"`
 
+Also, uncomment the following line to put your home bin on the `PATH`:
+
+`export PATH=$HOME/bin:/usr/local/bin:$PATH`
+
 Launch a new terminal and it should auto-launch `p10k configure` where you can choose your style. Or, use my preferred configuration by copying [.p10k.zsh](.p10k.zsh) into your home directory.
 
 Edit or create `.zprofile` and add the following:
@@ -560,7 +564,17 @@ Also, remember to make sure any existing `[alias]` sections out of the global co
 
 ## VS Code
 
-Let's setup `code` for proper use.
+First, let's add `code` to the zsh PATH so that we can launch it easily from the command line:
+
+```sh
+mkdir -p ~/bin
+cd ~/bin
+ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code
+```
+
+Now, let's install the code settings sync extension so that your settings will be imported and synchronized to your other installations:
+
+`code --install-extension Shan.code-settings-sync`
 
 ### Settings Sync
 
