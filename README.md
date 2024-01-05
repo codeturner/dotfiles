@@ -2,48 +2,135 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Files and methods used to setup my  Mac from scratch.
+Files and methods used to setup my Mac from scratch.
 
-Refer to <https://sourabhbajaj.com/mac-setup> for recipes for getting a mac up and going.
+Feel free to follow along and copy what looks good to you. I would suggest referring to the great work at <https://sourabhbajaj.com/mac-setup> as a starting point for recipes on how to get your mac up and going.
 
-## System Preferences
+## System Settings
 
-* View > organize alphabetically
+Open `System Settings` and consider making the following recommended changes:
+
 * Internet Accounts
   * icloud - check drive, contacts, calendars, reminders, keychain, findmymac
   * google - check contacts, calendars
-* Battery > Battery > 5 mins
-* Battery > Power > 30 mins
-* Battery > Power > Prevent sleep
-* Trackpad > Check all on all tabs
-* Keyboard > Keyboard > Key Repeat > Fast (all the way to the right)
-* Keyboard > Keyboard > Delay Until Repeat > Short 80%
-* Keyboard > Keyboard > Turn keyboard backlight off after 1 min of inactivity
-* Keyboard > Keyboard > Use F1, F2 keys...
-* Keyboard > Shortcuts > Launchpad > disable dock hiding shortcut
-* Keyboard > Shortcuts > Mission Control > disable show desktop as F11
-* Keyboard > Shortcuts > Spotlight > search shortcut - shift+cmd+space
-* Dock > Automatically hide and show the Dock
-* Dock > Bluetooth > Hide
-* Dock > Battery > Check all
-* Dock > AirDrop > Hide
-* Dock > Siri > Hide
-* Dock > Fast user switching > Show only control center
-* Spotlight > Uncheck fonts, images, files
-* Spotlight > Privacy > Add src
-* Set screenshots
-  * `mkdir ~/Screenshots`
-  * `defaults write com.apple.screencapture location ${HOME}/Screenshots && killall SystemUIServer`
-* Always show hidden files
-  * `defaults write com.apple.finder AppleShowAllFiles True; killall Finder`
+* Battery
+  * Options > Prevent automatic sleeping on power adapter when the display is off
+* Lock Screen
+  * Turn display off on battery when inactive > 5 mins
+  * Turn display off on power adapter when inactive > 30 mins
+* Trackpad
+  * Point & Click
+    * Track speed = 3
+    * Click = med
+    * Force click = on
+    * Look up & data detectors = tap with 3 fingers
+    * Secondary click = click with 2 fingers
+    * Tap to click = on
+  * Scroll & Zoom
+    * Natural scrolling = on
+    * Zoom in or out = pinch with two fingers
+    * Smart zoom = on
+    * Rotate = on
+  * More Gestures
+    * Swipe between pages = scroll left or right with two fingers
+    * Swipe betweeen full-screen applications = swipe left or right with three fingers
+    * Notification center = on
+    * Mission control = swipe up with three fingers
+    * App expose = swipe down with three fingers
+    * Launchpad = pinch with thumb and three fingers
+    * Show desktop = spread with thumb and three fingers
+* Keyboard
+  * Key Repeat > Fast (all the way to the right)
+  * Delay Until Repeat > Short 80%
+  * Turn keyboard backlight off after inactivity = 1 minute
+  * Keyboard Shortcuts
+    * Launchpad & Dock
+      * Turn Dock hiding on/off = disable shortcut
+    * Mission Control
+      * Show Desktop = disable shortcut
+    * Spotlight
+      * Show spotlight search = shift+cmd+space (Alfred will be using this shortcut)
+    * Function Keys
+      * Use F1, F2, etc keys as standard... = on
+* Desktop & Dock
+  * Size = 25%
+  * Magnification = off
+  * Automatically hide and show the Dock = on
+  * Desktop & Stage Manager
+    * Show Items = all off
+    * Click wallpaper to reveal desktop = only in stage manager
+    * Stage manager = off
+  * Windows
+    * Prefer tabs when opening documents = always
+    * Close window when quitting an application = off
+  * Mission Control
+    * Automatically rearrange Spaces based on most recent use = off
+    * When switching to an application, switch to a Space with open windows for the application = on
+    * Group windows by application = off
+    * Displays have seperate Spaces = on
+  * Hot Corners...
+    * disable all
+* Appearance
+  * Show scroll bars = always
+* Control Center
+  * Modules
+    * Bluetooth = Don't show
+    * AirDrop = Don't show
+    * Stage manager = Don't show
+  * Battery = Check all
+  * Menu Bar
+    * Clock
+      * Show date = when space allows
+      * Show day of week = on
+      * Show AM/PM = on
+      * Display time with seconds = on
+    * Siri = Don't show
+    * Time machine = Don't show
+  * Fast user switching = Show only control center
+  * Keyboard brightness = Show only control center
+* Siri & Spotlight
+  * Ask Siri = off
+  * Search results = Uncheck fonts, images, movies, music, other, siri suggestions
+  * Spotlight Privacy > Add src
+* Privacy & Security
+  * FileVault = turn on if you don't have Apple silicon/T2 chip
+
+### Screenshots
+
+By default, screenshots go to the desktop. It is recommended to put them into a dedicated location.
+
+```sh
+mkdir ~/Screenshots
+defaults write com.apple.screencapture location ${HOME}/Screenshots
+killall SystemUIServer
+```
+
+### Always show hidden files
+
+Press `cmd+shift+.` to temporarily show hidden files in Finder. But consider making that permanent.
+
+```sh
+defaults write com.apple.finder AppleShowAllFiles True
+killall Finder
+```
 
 ### Emoji Text Substitution
 
 Enable slack style text substitution everywhere by installing a plist into your `Keyboard > Text` preferences. Follow the instructions here: <https://github.com/warpling/Macmoji>
 
-### Modifier Keys
+Also, add some of your other favorites, such as:
 
-If you're using an external non-Apple keyboard, you will likely need to map the modifier keys. Go to `Keyboard > Keyboard > Modifier Keys` and swap the Command and Option keys.
+* ->  = → 
+* ehh = ¯\_(ツ)_/¯
+* omw = On my way!
+
+Note that text replacement syncs across iCloud to all your devices, so you should only have to do this once. That could be a good thing or a bad thing. ¯\_(ツ)_/¯
+
+Also note that not all applications support text replacement. Check the application's menu bar for support: `Edit > Substitutions`. If it's not supported, you'll need to use alfred or spotlight to generate the new text, then copy-paste to the destination.
+
+### Modifier Keys --- this doesn't work, maybe Alfred snippets?
+
+If you're using an external non-Apple keyboard, you will likely need to map the modifier keys in System Settings. Go to `Keyboard > Keyboard Shortcuts > Modifier Keys` and swap the Command and Option keys.
 
 ## Enable Home and End Keys
 
@@ -66,12 +153,14 @@ Note that you will need to reboot after creating this file for it to take effect
 
 Customize Finder with the following preferences:
 
-* Customize Toolbar - path, view, new folder, trash, share, actions
+* Customize Toolbar - path, view, group, new folder, trash, tags, share, actions
 * General > New Finder show > Home
 * Sidebar > check Home -- uncheck Shared
 * Advanced > Show extensions
 
 Then, drop other important folder to the Favorites part of the sidebar, such as `src` and `Screenshots`.
+
+To add `Trash` to the sidebar, open the Trash from the dockbar, go to the File menu and click `Add to Sidebar`.
 
 ## Cleanup Dock Bar
 
@@ -81,8 +170,8 @@ Remove all the default items. I prefer to use alfred to launch applications, so 
 
 Customize Messages with the following preferences:
 
-* General > disable play sound effect
-* iMessage > enable messages in icloud
+* General > play sound effects = off
+* iMessage > enable messages in icloud = on
 
 ## Install Apps
 
@@ -104,7 +193,7 @@ Using the app store, install the following:
 
 Fira Code is a great font for coding. Another repo forked it and added glyphs to the font to make it a great dev font.
 
-Download <https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Medium/complete/Fira%20Code%20Medium%20Nerd%20Font%20Complete.ttf> and install.
+Download <https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Medium/FiraCodeNerdFont-Medium.ttf> and double-click the file to install.
 
 The brew version is way out of date, so download and install this one directly instead.
 
@@ -115,7 +204,7 @@ This is a ligature and antialiased font, so use it with those settings turned on
 Install the missing package manager for macOS by following the instructions at <https://brew.sh>:
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 ### Formulae
@@ -124,8 +213,8 @@ When installing the following brew formulae, pay extra attention to notices indi
 
 * ack - faster grep
 * bash-completion - auto complete library; additional ones available
-* fzf - fuzzy finder
-* gh - github cli
+* fzf - [fuzzy finder](https://www.redhat.com/sysadmin/fzf-linux-fuzzy-finder)
+* gh - [github cli](https://cli.github.com)
 * git - source control
 * git-lfs - git large file support
 * go - go language
@@ -161,7 +250,6 @@ Install the following brew casks:
 * keystore-explorer - exactly what it says
 * postman - API tool
 * react-native-debugger - dev tool
-* rectangle - alternative to bettersnaptool
 * scroll-reverser - trackpad should be like an ipad, mouse should be reverse of that
   * Preferences > App > Start at login
   * Preferences > Scrolling > Enable
@@ -179,7 +267,7 @@ Using finder, selecting a file and tapping the space bar will bring up the Quick
 
 Install the following quick look plugins casks:
 
-> Note some of these apps aren't official Apple apps, so you may need to install using the no quarantine option:
+> Note some of these apps aren't official Apple apps, so you may need to reinstall using the no quarantine option:
 > `brew install --cask --no-quarantine CASK_NAME_HERE`
 
 * qlmarkdown - preview markdown in github style
@@ -187,6 +275,24 @@ Install the following quick look plugins casks:
 * betterzip - preview archives - teases as a paid app but the included quick look is free
 
 > Note that each of these install as apps, so you'll need to launch each app for the first time to activate the plugin.
+
+#### Quick Look Permission Notes
+
+To get some of these plugins working in Catalina+, you might need to remove the quarantine attribute. Installing using the `--no-quarantine` option in brew should handle this, but if all else fails, you can correct the situation manually.
+
+For example, if a quicklook plugin isn't working, run this to see the attributes:
+
+```sh
+xattr -r ~/Library/QuickLook
+```
+
+And run this to remove the attributes:
+
+```sh
+xattr -d -r com.apple.quarantine ~/Library/QuickLook
+```
+
+Then, restart your system, or hopefully `qlmanage -r` will suffice.
 
 ### Folder Icons
 
@@ -209,23 +315,250 @@ folderify icons/crop.png ~/Screenshots
 
 Note that if you add these folders to the sidebar, mac only supports its own icons here (or those who have written a Finder Sync Extension).
 
-### Catalina Notes
+## ssh keys
 
-To get some of these plugins working in Catalina+, you might need to remove the quarantine attribute. Installing using the `--no-quarantine` option in brew should handle this, but if all else fails, you can correct the situation manually.
+First, your mac needs to have a default key by which it can be identified when ssh'ing to general services.
 
-For example, if a quicklook plugin isn't working, run this to see the attributes:
-
-```sh
-xattr -r ~/Library/QuickLook
-```
-
-And run this to remove the attributes:
+Run the following command:
 
 ```sh
-xattr -d -r com.apple.quarantine ~/Library/QuickLook
+ssh-keygen -f ~/.ssh/default-$(date "+%Y%m%d")-${USER}-$(hostname)
 ```
 
-Then, restart your system, or hopefully `qlmanage -r` will suffice.
+When prompted to enter and re-enter a passphrase, press enter to leave empty.
+
+The command creates your default identity with its public and private keys. The whole interaction will look similar to the following:
+
+```sh
+> ssh-keygen -f ~/.ssh/default-$(date "+%Y%m%d")-${USER}-$(hostname)
+Generating public/private rsa key pair.
+Created directory '/Users/codeturner/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/codeturner/.ssh/default-20220101-codeturner-m1pro22
+Your public key has been saved in /Users/codeturner/.ssh/default-20220101-codeturner-m1pro22.pub
+The key fingerprint is:
+SHA256:+8imEAhAJkJoO3jA2CsZEpQgld7MenKSegL2uDIlKEk blah-blah-blah
+The key's randomart image is:
++---[RSA 3072]----+
+|/Oo.             |
+|%+o              |
+|==.=             |
+|+E+.+            |
+|o+oo.   S        |
+|*.* o.   .       |
+|++o=.   .        |
+|=... . ..o       |
+|.=.   .oo .      |
++----[SHA256]-----+
+```
+
+This will create two files in a folder called .ssh in your home directory with the name you specified in the command line.
+
+Now, let's wire it up to the system by editing the `~/.ssh/config`:
+
+```text
+UseKeychain yes
+AddKeysToAgent yes
+IdentityFile ~/.ssh/default-blah-blah-blah
+```
+
+I mean, duh, don't paste in "default-blah-blah-blah" -- it should be your actual file names.
+
+Finally, add the new private key to your agent:
+
+```sh
+ssh-add ~/.ssh/default-blah-blah-blah
+```
+
+### Github Key Access
+
+Let's create another key for this device's access to github:
+
+```sh
+vared -p "github username: " -c _GHUSER
+ssh-keygen -f ~/.ssh/github-$(date "+%Y%m%d")-${_GHUSER}-$(hostname)
+```
+
+Now, let's wire this new key up to the `github.com` host by editing the `~/.ssh/config` and specifying the new key generated:
+
+```text
+Host github.com
+  HostName github.com
+  IdentityFile ~/.ssh/github-blah-blah-blah
+```
+
+As before, add the new private key to your agent:
+
+```sh
+ssh-add ~/.ssh/github-blah-blah-blah
+```
+
+Next, let's connect to github using your newly generated key.
+
+Login to github.com and navigate to Profile > Settings > SSH and GPG keys. Click new key and paste the contents of your newly generated github public key and save. To quickly get it to your clipboard for pasting, do:
+
+```sh
+pbcopy < ~/.ssh/github-blah-blah-blah.pub
+```
+
+Once done, verify ssh access:
+
+```sh
+ssh -T git@github.com
+```
+
+### Managing Multiple Github Accounts
+
+If you're like me, you have two Github accounts: one for personal and one for work. How to use both accounts on the same computer automatically?
+``
+Simply repeat the steps in the [Github Key Access](#github-key-access) section above, but use an alias for the `Host` entry in the `~/.ssh/config` file.
+
+For example, if I wanted to create a new key for a github account called `batteryshoes`, my config might now look like this:
+
+```text
+Host github.com-batteryshoes
+  HostName github.com
+  IdentityFile ~/.ssh/github-20220101-batteryshoes-mymac
+```
+
+Once done, verify ssh access:
+
+```sh
+ssh -T git@github.com-batteryshoes
+```
+
+Then to use this new account in your git commands, simply use the host alias of `github.com-batteryshoes` to clone the repo.
+
+## iTerm2 setup
+
+Import settings from repo by selecting Preferences > General > Preferences, then checking Load preferences from a custom folder or URL, and selecting the iterm2 folder in this repository.
+
+### Oh My Zsh
+
+Install oh my zsh:
+
+`sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
+
+Then, install the theme plugin `p10k`:
+
+`git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
+
+Edit `.zshrc` and set the theme:
+
+`ZSH_THEME="powerlevel10k/powerlevel10k"`
+
+Also, uncomment the following line to put your home bin on the `PATH`:
+
+`export PATH=$HOME/bin:/usr/local/bin:$PATH`
+
+Launch a new terminal and it should auto-launch `p10k configure` where you can choose your style. Or, use my preferred configuration by copying [.p10k.zsh](.p10k.zsh) into your home directory.
+
+Edit or create `.zprofile` and add the following:
+
+```sh
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+```
+
+Copy the all of the files in this repo's [.oh-my-zsh/custom](.oh-my-zsh/custom) into `$ZSH_CUSTOM`.
+
+### Bash
+
+This is optional. If you're full into zsh (and why wouldn't you be) then there's no need to do this section.
+
+Copy all .bashrc* files into the home directory.
+
+Create a .bash_profile file and add the following:
+
+```sh
+# Add Homebrew `/usr/local/bin` and User `~/bin` to the `$PATH`
+export PATH=$HOME/bin:.:$PATH
+
+# bash completion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+# git auto-complete
+[[ -s /opt/homebrew/etc/bash_completion.d/git-completion.bash ]] && source /opt/homebrew/etc/bash_completion.d/git-completion.bash
+
+# git prompt
+[[ -s /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]] && source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
+
+# ag auto-complete
+[[ -s /opt/homebrew/etc/bash_completion.d/ag.bashcomp.sh ]] && source /opt/homebrew/etc/bash_completion.d/ag.bashcomp.sh
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# Load the shell dotfiles
+source ~/.bashrc
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
+```
+
+## sudo
+
+Be sure you either are an admin to your machine or have an explicit entry in the sudoers file.
+
+## Git
+
+Let's customize your git install.
+
+### Configure
+
+Set your default git user:
+
+```sh
+git config --global user.name "Put Your Name Here"
+git config --global user.email "put_your@email_here"
+```
+
+And set the default branch:
+
+```sh
+git config --global init.defaultBranch main
+```
+
+And tell git to automatically prune remote branches on calls `fetch` or `pull`:
+
+```sh
+git config --global remote.origin.prune true
+```
+
+Next, let's set vscode as our default merge/diff tool:
+
+```sh
+git config --global merge.tool vscode
+git config --global mergetool.vscode.cmd 'code --wait $MERGED'
+git config --global diff.tool vscode
+git config --global diff.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
+```
+
+All these commands will be reflected to your `~/.gitconfig` file.
+
+### Custom Commands
+
+Git has a great plugin where if you have an executable script in your PATH that follows the naming scheme of `git-mycommand`, then you'll be able to run this custom script as the git command: `git mycommand`
+
+Let's add a custom command to cleanup local branches interactively. Copy [bin/git-cleanunmerged](bin/git-cleanunmerged) into the home directory. Note that we made sure the `~/bin` is in the `PATH` env var above.
+
+Then, cuz I'm lazy, I wrote an alias that maps `git bclean` to this script `git cleanunmerged` (see [Custom Aliases](#custom-aliases)).
+
+### Custom Aliases
+
+Copy [.gitconfig.aliases](.gitconfig.aliases) into your home directory. Then, reference this file in your config:
+
+```sh
+git config --global include.path ~/.gitconfig.aliases
+```
+
+Also, remember to make sure any existing `[alias]` sections out of the global config file at `~/.gitconfig`.
 
 ## Node
 
@@ -236,8 +569,8 @@ Let's download node and set our default version.
 nvm i node
 # install lts
 nvm i --lts
-# set current and default to lts (assuming v16.* is current lts)
-nvm use default 16
+# set current and default to lts
+nvm use default --lts
 ```
 
 ## SDKMAN
@@ -317,276 +650,19 @@ OS name: "mac os x", version: "12.1", arch: "aarch64", family: "mac"
 
 Note here is no need to set MAVEN_HOME or M2_HOME  since sdkman will set it when your shell launches. You'll need to relaunch your shell to see this in action.
 
-## iTerm2 setup
-
-Import settings from repo by selecting Preferences > General > Preferences, then checking Load preferences from a custom folder or URL, and selecting the iterm2 folder in this repository.
-
-### Oh My Zsh
-
-Install oh my zsh:
-
-`sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
-
-Then, install the theme plugin `p10k`:
-
-`git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k`
-
-Edit `.zshrc` and set the theme:
-
-`ZSH_THEME="powerlevel10k/powerlevel10k"`
-
-Also, uncomment the following line to put your home bin on the `PATH`:
-
-`export PATH=$HOME/bin:/usr/local/bin:$PATH`
-
-Launch a new terminal and it should auto-launch `p10k configure` where you can choose your style. Or, use my preferred configuration by copying [.p10k.zsh](.p10k.zsh) into your home directory.
-
-Edit or create `.zprofile` and add the following:
-
-```sh
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-```
-
-Copy the all of the files in this repo's [.oh-my-zsh/custom](.oh-my-zsh/custom) into `$ZSH_CUSTOM`.
-
-### Bash
-
-This is optional. If you're full into zsh (and why wouldn't you be) then there's no need to do this section.
-
-Copy all .bashrc* files into the home directory.
-
-Create a .bash_profile file and add the following:
-
-```sh
-# Add Homebrew `/usr/local/bin` and User `~/bin` to the `$PATH`
-export PATH=$HOME/bin:.:$PATH
-
-# bash completion
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && source "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-# git auto-complete
-[[ -s /opt/homebrew/etc/bash_completion.d/git-completion.bash ]] && source /opt/homebrew/etc/bash_completion.d/git-completion.bash
-
-# git prompt
-[[ -s /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]] && source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
-
-# ag auto-complete
-[[ -s /opt/homebrew/etc/bash_completion.d/ag.bashcomp.sh ]] && source /opt/homebrew/etc/bash_completion.d/ag.bashcomp.sh
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# Load the shell dotfiles
-source ~/.bashrc
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="~/.sdkman"
-[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
-```
-
-### sudo
-
-Be sure you either are an admin to your machine or have an explicit entry in the sudoers file.
-
-## ssh keys
-
-First, your mac needs to have a default key by which it can be identified when ssh'ing to general services.
-
-Run the following command:
-
-```sh
-ssh-keygen -f ~/.ssh/default-$(date "+%Y%m%d")-${USER}-$(hostname)
-```
-
-When prompted to enter and re-enter a passphrase, press enter to leave empty.
-
-The command creates your default identity with its public and private keys. The whole interaction will look similar to the following:
-
-```sh
-> ssh-keygen -f ~/.ssh/default-$(date "+%Y%m%d")-${USER}-$(hostname)
-Generating public/private rsa key pair.
-Created directory '/Users/codeturner/.ssh'.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /Users/codeturner/.ssh/default-20220101-codeturner-m1pro22.local
-Your public key has been saved in /Users/codeturner/.ssh/default-20220101-codeturner-m1pro22.local.pub
-The key fingerprint is:
-SHA256:+8imEAhAJkJoO3jA2CsZEpQgld7MenKSegL2uDIlKEk blah-blah-blah
-The key's randomart image is:
-+---[RSA 3072]----+
-|/Oo.             |
-|%+o              |
-|==.=             |
-|+E+.+            |
-|o+oo.   S        |
-|*.* o.   .       |
-|++o=.   .        |
-|=... . ..o       |
-|.=.   .oo .      |
-+----[SHA256]-----+
-```
-
-This will create two files in a folder called .ssh in your home directory with the name you specified in the command line.
-
-Now, let's wire it up to the system by editing the `~/.ssh/config`:
-
-```text
-UseKeychain yes
-AddKeysToAgent yes
-IdentityFile ~/.ssh/default-blah-blah-blah.local
-```
-
-I mean, duh, don't paste in "default-blah-blah-blah.local" -- it should be your actual file names.
-
-Finally, add the new private key to your agent:
-
-```sh
-ssh-add ~/.ssh/default-blah-blah-blah.local
-```
-
-### Github Key Access
-
-Let's create another key for this device's access to github:
-
-```sh
-vared -p "github username: " -c _GHUSER
-ssh-keygen -f ~/.ssh/github-$(date "+%Y%m%d")-${_GHUSER}-$(hostname)
-```
-
-Now, let's wire this new key up to the `github.com` host by editing the `~/.ssh/config` and specifying the new key generated:
-
-```text
-Host github.com
-  HostName github.com
-  IdentityFile ~/.ssh/github-blah-blah-blah.local
-```
-
-As before, add the new private key to your agent:
-
-```sh
-ssh-add ~/.ssh/default-blah-blah-blah.local
-```
-
-Next, let's connect to github using your newly generated key.
-
-Login to github.com and navigate to Profile > Settings > SSH and GPG keys. Click new key and paste the contents of your newly generated github public key and save. To quickly get it to your clipboard for pasting, do:
-
-```sh
-pbcopy < ~/.ssh/github-blah-blah-blah.local.pub
-```
-
-Once done, verify ssh access:
-
-```sh
-ssh -T git@github.com
-```
-
-### Managing Multiple Github Accounts
-
-If you're like me, you have two Github accounts: one for personal and one for work. How to use both accounts on the same computer automatically?
-
-Simply repeat the steps in the [Github Key Access](#github-key-access) section above, but use an alias for the `Host` entry in the `~/.ssh/config` file.
-
-For example, if I wanted to create a new key for a github account called `batteryshoes`, my config might now look like this:
-
-```text
-Host github.com-batteryshoes
-  HostName github.com
-  IdentityFile ~/.ssh/github-20220101-batteryshoes-mymac.local
-```
-
-Once done, verify ssh access:
-
-```sh
-ssh -T git@github.com-batteryshoes
-```
-
-Then to use this new account in your git commands, simply use the host alias of `github.com-batteryshoes` to clone the repo.
-
-## Git
-
-Let's customize your git install.
-
-### Configure
-
-Set your default git user:
-
-```sh
-git config --global user.name "Put Your Name Here"
-git config --global user.email "put_your@email_here"
-```
-
-And set the default branch:
-
-```sh
-git config --global init.defaultBranch main
-```
-
-And tell git to automatically prune remote branches on calls `fetch` or `pull`:
-
-```sh
-git config --global remote.origin.prune true
-```
-
-Next, let's set vscode as our default merge/diff tool:
-
-```sh
-git config --global merge.tool vscode
-git config --global mergetool.vscode.cmd 'code --wait $MERGED'
-git config --global diff.tool vscode
-git config --global diff.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
-```
-
-All these commands will be reflected to your `~/.gitconfig` file.
-
-### Custom Commands
-
-Git has a great plugin where if you have an executable script in your PATH that follows the naming scheme of `git-mycommand`, then you'll be able to run this custom script as the git command: `git mycommand`
-
-Let's add a custom command to cleanup local branches interactively. Copy [bin/git-cleanunmerged](bin/git-cleanunmerged) into the home directory. Note that we made sure the `~/bin` is in the `PATH` env var above.
-
-Then, cuz I'm lazy, I wrote an alias that maps `git bclean` to this script `git cleanunmerged` (see [Custom Aliases](#custom-aliases)).
-
-### Custom Aliases
-
-Copy [.gitconfig.aliases](.gitconfig.aliases) into your home directory. Then, reference this file in your config:
-
-```sh
-git config --global include.path ~/.gitconfig.aliases
-```
-
-Also, remember to make sure any existing `[alias]` sections out of the global config file at `~/.gitconfig`.
-
 ## VS Code
-
-First, let's add `code` to the zsh PATH so that we can launch it easily from the command line:
-
-```sh
-mkdir -p ~/bin
-cd ~/bin
-ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code
-```
-
-Now, let's install the code settings sync extension so that your settings will be imported and synchronized to your other installations:
-
-`code --install-extension Shan.code-settings-sync`
 
 ### Settings Sync
 
-First, let's load up what we've sync'd before on other installs of code.
+Settings sync is now embedded in vscode .. hooray!
 
-Turn on Settings Sync using the `Turn On Settings Sync...` entry in the `Manage` gear menu at the bottom of the Activity Bar.
-
-Select all settings to sync. Then, click `Sign in & Turn on` and sign in with your GitHub or Microsoft account. After making this selection, the browser will open so that you can sign in to your Microsoft or GitHub account. When a Microsoft account is chosen, you can use either personal accounts, such as Outlook accounts, or Azure accounts, and you can also link a GitHub account to a new or existing Microsoft account.
+To start, open vscode then select Settings > Backup and Sync Settings from the menu and sign in with your GitHub or Microsoft account. After making this selection, the browser will open so that you can sign in to your Microsoft or GitHub account. When a Microsoft account is chosen, you can use either personal accounts, such as Outlook accounts, or Azure accounts, and you can also link a GitHub account to a new or existing Microsoft account.
 
 After signing in, Settings Sync will be turned on and continue to synchronize your preferences automatically in the background.
 
-Now, just sit back and wait for your VS Code to update.
+If you've done this previously, now you can just sit back and wait for your vscode to update to your saved settings.
+
+Note - it may ask you to restart. Once it launches again, double check from the menu that it says something like Settings > Settings Sync is On.
 
 ### Recommended extensions
 
